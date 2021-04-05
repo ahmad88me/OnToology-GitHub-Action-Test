@@ -36,5 +36,5 @@ jobs:
           echo test, and deploy your project.
       - name: Download OOPS! report Generator
         run: |
-          git clone git@github.com:OnToology/oops-report.git
+          git clone https://github.com/OnToology/oops-report.git
           cd oops-report; python main.py
