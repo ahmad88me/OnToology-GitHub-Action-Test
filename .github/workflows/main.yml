@@ -43,4 +43,4 @@ jobs:
       - name: Download OOPS! report Generator
         run: |
           git clone https://github.com/OnToology/oops-report.git
-          cd oops-report; pip install -r requirements.txt; python main.py --outputdir . --ontologydir ../OnToology-GitHub-Action-Test --verbose true
+          cd oops-report; pip install -r requirements.txt; python main.py --outputdir . --ontologydir ../OnToology-GitHub-Action-Test/alo.owl --verbose true
