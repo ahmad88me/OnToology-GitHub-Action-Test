@@ -47,3 +47,6 @@ jobs:
         run: |
           git clone https://github.com/OnToology/oops-report.git
           cd oops-report; pip install -r requirements.txt; python main.py --outputdir . --ontologydir $GITHUB_WORKSPACE/alo.owl --verbose true
+      - name: Git Push
+        run:
+          cd $GITHUB_WORKSPACE ; git add . ; git commit -m 'OnToology GitHub Action push' ; git push origin main
