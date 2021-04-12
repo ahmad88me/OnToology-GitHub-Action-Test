@@ -45,10 +45,10 @@ jobs:
           cd $GITHUB_WORKSPACE ; wget -O widoco.jar https://github.com/dgarijo/Widoco/releases/download/v1.4.14/widoco-1.4.14-jar-with-dependencies.jar
       - name: Download OOPS! report Generator
         run: |
-          cd $GITHUB_WORKSPACE ; git clone https://github.com/OnToology/oops-report.git
+          cd $GITHUB_WORKSPACE ;  git clone https://github.com/OnToology/oops-report.git ; cd oops-report; pip install -r requirements.txt;
       - name: Make OnToology directory
         run: |
-          cd $GITHUB_WORKSPACE ; mkdir -p OnToology;
+          cd $GITHUB_WORKSPACE ;   mkdir -p OnToology;
 
       - name: Make alo.owl directory
         run: |
@@ -58,5 +58,5 @@ jobs:
           cd $GITHUB_WORKSPACE ; java -jar -Dfile.encoding=utf-8 widoco.jar -ontFile alo.owl -outFolder OnToology/alo.owl/documentation -getOntologyMetadata -licensius -htaccess -lang en
       - name: Download OOPS! report Generator
         run: |
-          cd oops-report; pip install -r requirements.txt; python main.py --outputdir ../OnToology/evaluation --ontologydir ../alo.owl --verbose true
+          cd $GITHUB_WORKSPACE ; ls -ltra; python oops-report/main.py --outputdir OnToology/evaluation --ontologydir alo.owl --verbose true
 
