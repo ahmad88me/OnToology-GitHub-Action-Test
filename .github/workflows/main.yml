@@ -52,11 +52,10 @@ jobs:
 
       - name: Make alo.owl directory
         run: |
-          cd $GITHUB_WORKSPACE ;  cd OnToology; mkdir -p alo.owl; cd alo.owl; mkdir -p documentation; mkdir -p evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
+          cd $GITHUB_WORKSPACE/OnToology; mkdir -p alo.owl; cd alo.owl; mkdir -p documentation; mkdir -p evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
       - name: Generate Documentation
         run: |
           cd $GITHUB_WORKSPACE ; java -jar -Dfile.encoding=utf-8 widoco.jar -ontFile alo.owl -outFolder OnToology/alo.owl/documentation -getOntologyMetadata -licensius -htaccess -lang en
-
       - name: Download OOPS! report Generator
         run: |
           cd oops-report; pip install -r requirements.txt; python main.py --outputdir $GITHUB_WORKSPACE/OnToology/evaluation --ontologydir $GITHUB_WORKSPACE/alo.owl --verbose true
