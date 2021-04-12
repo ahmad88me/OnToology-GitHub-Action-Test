@@ -40,16 +40,29 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Validate dir
+      - name: Download Widoco
         run: |
-          cd $GITHUB_WORKSPACE ; ls -ltra
+          cd $GITHUB_WORKSPACE ; wget -O widoco.jar https://github.com/dgarijo/Widoco/releases/download/v1.4.14/widoco-1.4.14-jar-with-dependencies.jar
       - name: Download OOPS! report Generator
         run: |
-          git clone https://github.com/OnToology/oops-report.git
-          cd oops-report; pip install -r requirements.txt; python main.py --outputdir $GITHUB_WORKSPACE --ontologydir $GITHUB_WORKSPACE/alo.owl --verbose true
+          cd $GITHUB_WORKSPACE ; git clone https://github.com/OnToology/oops-report.git
+      - name: Make OnToology directory
+        run: |
+          cd $GITHUB_WORKSPACE ; mkdir OnToology;
+
+      - name: Make alo.owl directory
+        run: |
+          cd $GITHUB_WORKSPACE ; mkdir OnToology; cd OnToology; mkdir alo.owl; cd alo.owl; mkdir documentation; mkdir evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
+      - name: Generate Documentation
+        run: |
+          cd $GITHUB_WORKSPACE ; java -jar -Dfile.encoding=utf-8 widoco.jar -ontFile alo.owl -outFolder OnToology/alo.owl/documentation -getOntologyMetadata -licensius -htaccess -lang en
+
+      - name: Download OOPS! report Generator
+        run: |
+          cd oops-report; pip install -r requirements.txt; python main.py --outputdir $GITHUB_WORKSPACE/OnToology/evaluation --ontologydir $GITHUB_WORKSPACE/alo.owl --verbose true
       - name: Git Push
         run: |
           cd $GITHUB_WORKSPACE
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
           git config --local user.name "$(git log --format='%an' HEAD^!)"
-          rm -Rf oops-report;  git add . ; git commit -m 'OnToology GitHub Action push' ; git push origin main
+          rm -Rf oops-report; rm -Rf widoco.jar; git add . ; git commit -m 'OnToology GitHub Action push' ; git push origin main
