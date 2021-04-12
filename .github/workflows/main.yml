@@ -40,9 +40,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Download Widoco
-        run: |
-          cd $GITHUB_WORKSPACE ; wget -O widoco.jar https://github.com/dgarijo/Widoco/releases/download/v1.4.14/widoco-1.4.14-jar-with-dependencies.jar
       - name: Download OOPS! report Generator
         run: |
           cd $GITHUB_WORKSPACE ;  git clone https://github.com/OnToology/oops-report.git ; cd oops-report; pip install -r requirements.txt;
@@ -53,10 +50,7 @@ jobs:
       - name: Make alo.owl directory
         run: |
           cd $GITHUB_WORKSPACE/OnToology; mkdir -p alo.owl; cd alo.owl; mkdir -p documentation; mkdir -p evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
-      - name: Generate Documentation
-        run: |
-          cd $GITHUB_WORKSPACE ; java -jar -Dfile.encoding=utf-8 widoco.jar -ontFile alo.owl -outFolder OnToology/alo.owl/documentation -getOntologyMetadata -licensius -htaccess -lang en
       - name: Download OOPS! report Generator
         run: |
-          cd $GITHUB_WORKSPACE ; ls -ltra; python oops-report/main.py --outputdir OnToology/evaluation --ontologydir alo.owl --verbose true
+          cd $GITHUB_WORKSPACE ; ls -ltra; cd oops-report; python main.py --outputdir ../OnToology/evaluation --ontologydir ../alo.owl --verbose true
 
