@@ -49,8 +49,8 @@ jobs:
 
       - name: Make alo.owl directory
         run: |
-          cd $GITHUB_WORKSPACE/OnToology; mkdir -p alo.owl; cd alo.owl; mkdir -p documentation; mkdir -p evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
+          cd $GITHUB_WORKSPACE; cd OnToology; mkdir -p alo.owl; cd alo.owl; mkdir -p documentation; mkdir -p evaluation; wget https://raw.githubusercontent.com/ahmad88me/demo/master/OnToology/alo.owl/OnToology.cfg
       - name: Download OOPS! report Generator
         run: |
-          cd $GITHUB_WORKSPACE ; ls -ltra; cd oops-report; python main.py --outputdir ../OnToology/evaluation --ontologydir ../alo.owl --verbose true
+          cd $GITHUB_WORKSPACE ; ls -ltra; cd oops-report; python main.py --outputdir ../OnToology/alo.owl/evaluation --ontologydir ../alo.owl --verbose true
 
