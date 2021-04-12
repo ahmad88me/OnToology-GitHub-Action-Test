@@ -58,8 +58,8 @@ jobs:
           cd $GITHUB_WORKSPACE ; java -jar -Dfile.encoding=utf-8 widoco.jar -ontFile alo.owl -outFolder OnToology/alo.owl/documentation -getOntologyMetadata -licensius -htaccess -lang en
       - name: Download OOPS! report Generator
         run: |
-          cd oops-report; pip install -r requirements.txt; python main.py --outputdir OnToology/evaluation --ontologydir alo.owl --verbose true
-      - name: Git Push
+          cd oops-report; pip install -r requirements.txt; python main.py --outputdir OnToology/evaluation --ontologydir ./alo.owl --verbose true
+      - name: Git Push 
         run: |
           cd $GITHUB_WORKSPACE
           git config --local user.email "$(git log --format='%ae' HEAD^!)"
